@@ -67,11 +67,18 @@ Telemetry is disabled by default. You can enable it by building the image with:
 docker build -t qmcgaw/caddy --build-arg TELEMETRY=true https://github.com/qdm12/caddy-scratch.git
 ```
 
+## Little tricks
+
+- Hot reload the Caddyfile with
+
+    ```sh
+    docker kill --signal=USR1 caddy
+    ```
+
 ## TODOs
 
 - [ ] Use lists of IPs to block with ipfilter with `import blockIps`
 - [ ] Healthcheck for Caddy
-- [ ] Fix reloading of Caddyfile with SIGUSR1
 - [ ] Intelligent IP blocking
 
 ## License
