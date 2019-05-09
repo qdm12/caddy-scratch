@@ -2,7 +2,7 @@
 
 *Caddy server 1.0.0 with optional plugins on a Scratch Docker image*
 
-[![caddy-scratch](https://github.com/qdm12/caddy-scratch/raw/master/title.png)](https://hub.docker.com/r/qmcgaw/caddy-scratch)
+[![caddy-scratch](https://github.com/qdm12/caddy-scratch/raw/master/title.jpg)](https://hub.docker.com/r/qmcgaw/caddy-scratch)
 
 [![Docker Build Status](https://img.shields.io/docker/build/qmcgaw/caddy-scratch.svg)](https://hub.docker.com/r/qmcgaw/caddy-scratch)
 
