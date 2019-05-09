@@ -2,20 +2,20 @@
 
 *Caddy server 1.0.0 with optional plugins on a Scratch Docker image*
 
-[![caddy-scratch](https://github.com/qdm12/caddy-scratch/raw/master/title.jpg)](https://hub.docker.com/r/qmcgaw/tinycaddy)
+[![caddy-scratch](https://github.com/qdm12/caddy-scratch/raw/master/title.jpg)](https://hub.docker.com/r/qmcgaw/caddy-scratch)
 
-[![Docker Build Status](https://img.shields.io/docker/build/qmcgaw/tinycaddy.svg)](https://hub.docker.com/r/qmcgaw/tinycaddy)
+[![Docker Build Status](https://img.shields.io/docker/cloud/build/qmcgaw/caddy-scratch.svg)](https://hub.docker.com/r/qmcgaw/caddy-scratch)
 
 [![GitHub last commit](https://img.shields.io/github/last-commit/qdm12/caddy-scratch.svg)](https://github.com/qdm12/caddy-scratch/issues)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/qdm12/caddy-scratch.svg)](https://github.com/qdm12/caddy-scratch/issues)
 [![GitHub issues](https://img.shields.io/github/issues/qdm12/caddy-scratch.svg)](https://github.com/qdm12/caddy-scratch/issues)
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/qmcgaw/tinycaddy.svg)](https://hub.docker.com/r/qmcgaw/tinycaddy)
-[![Docker Stars](https://img.shields.io/docker/stars/qmcgaw/tinycaddy.svg)](https://hub.docker.com/r/qmcgaw/tinycaddy)
-[![Docker Automated](https://img.shields.io/docker/automated/qmcgaw/tinycaddy.svg)](https://hub.docker.com/r/qmcgaw/tinycaddy)
+[![Docker Pulls](https://img.shields.io/docker/pulls/qmcgaw/caddy-scratch.svg)](https://hub.docker.com/r/qmcgaw/caddy-scratch)
+[![Docker Stars](https://img.shields.io/docker/stars/qmcgaw/caddy-scratch.svg)](https://hub.docker.com/r/qmcgaw/caddy-scratch)
+[![Docker Automated](https://img.shields.io/docker/cloud/automated/qmcgaw/caddy-scratch.svg)](https://hub.docker.com/r/qmcgaw/caddy-scratch)
 
-[![Image size](https://images.microbadger.com/badges/image/qmcgaw/tinycaddy.svg)](https://microbadger.com/images/qmcgaw/tinycaddy)
-[![Image version](https://images.microbadger.com/badges/version/qmcgaw/tinycaddy.svg)](https://microbadger.com/images/qmcgaw/tinycaddy)
+[![Image size](https://images.microbadger.com/badges/image/qmcgaw/caddy-scratch.svg)](https://microbadger.com/images/qmcgaw/caddy-scratch)
+[![Image version](https://images.microbadger.com/badges/version/qmcgaw/caddy-scratch.svg)](https://microbadger.com/images/qmcgaw/caddy-scratch)
 
 | Image size | RAM usage | CPU usage |
 | --- | --- | --- |
@@ -25,6 +25,12 @@ It is based on:
 
 - [Scratch](https://hub.docker.com/_/scratch/)
 - [Caddy 1.0.0](https://github.com/mholt/caddy) built with Go 1.12.5 and Alpine 3.9
+
+Features:
+
+- Runs **without** root
+- Plugins can easily be plugged in
+- Scratch based, so less attack surface
 
 ## Setup
 
@@ -36,7 +42,7 @@ docker run -d \
 -v $(pwd)/data:/data \
 -v $(pwd)/srv:/srv:ro \
 -p 80:8080/tcp -p 443:8443/tcp -p 2015:2015/tcp \
-qmcgaw/tinycaddy
+qmcgaw/caddy-scratch
 ```
 
 or use [docker-compose.yml](https://github.com/qdm12/caddy-scratch/blob/master/docker-compose.yml) with:
