@@ -42,8 +42,8 @@ LABEL org.label-schema.schema-version="1.0.0-rc1" \
     org.label-schema.docker.params="" \
     org.label-schema.version="${VERSION}" \
     image-size="15.8MB" \
-    ram-usage="Depends" \
-    cpu-usage="Depends"
+    ram-usage="18MB but depends on traffic" \
+    cpu-usage="Low but depends on traffic"
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 EXPOSE 8080 8443 2015
 # HEALTHCHECK --interval=100s --timeout=3s --start-period=10s --retries=1 CMD ["/healthcheck"]   

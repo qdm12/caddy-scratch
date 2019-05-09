@@ -2,6 +2,8 @@
 
 *Caddy server 1.0.0 with optional plugins on a Scratch Docker image*
 
+[![caddy-scratch](https://github.com/qdm12/caddy-scratch/raw/master/title.png)](https://hub.docker.com/r/qmcgaw/caddy-scratch)
+
 [![Docker Build Status](https://img.shields.io/docker/build/qmcgaw/caddy-scratch.svg)](https://hub.docker.com/r/qmcgaw/caddy-scratch)
 
 [![GitHub last commit](https://img.shields.io/github/last-commit/qdm12/caddy-scratch.svg)](https://github.com/qdm12/caddy-scratch/issues)
@@ -17,7 +19,7 @@
 
 | Image size | RAM usage | CPU usage |
 | --- | --- | --- |
-| 15.8MB |  |  |
+| 15.8MB | 18MB | Low |
 
 It is based on:
 
