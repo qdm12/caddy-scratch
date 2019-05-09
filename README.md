@@ -1,10 +1,7 @@
 # Caddy Scratch Docker
 
-*Caddy server with plugins on a Scratch base Docker image*
+*Caddy server 1.0.0 with optional plugins on a Scratch Docker image*
 
-[![caddy-scratch](https://github.com/qdm12/caddy-scratch/raw/master/title.png)](https://hub.docker.com/r/qmcgaw/caddy-scratch)
-
-[![Build Status](https://travis-ci.org/qdm12/caddy-scratch.svg?branch=master)](https://travis-ci.org/qdm12/caddy-scratch)
 [![Docker Build Status](https://img.shields.io/docker/build/qmcgaw/caddy-scratch.svg)](https://hub.docker.com/r/qmcgaw/caddy-scratch)
 
 [![GitHub last commit](https://img.shields.io/github/last-commit/qdm12/caddy-scratch.svg)](https://github.com/qdm12/caddy-scratch/issues)
@@ -20,12 +17,12 @@
 
 | Image size | RAM usage | CPU usage |
 | --- | --- | --- |
-| 20.5MB | MB | Depends |
+| 15.8MB |  |  |
 
 It is based on:
 
 - [Scratch](https://hub.docker.com/_/scratch/)
-- [Caddy 0.11.1](https://github.com/mholt/caddy)
+- [Caddy 1.0.0](https://github.com/mholt/caddy) built with Go 1.12.5 and Alpine 3.9
 
 ## Setup
 
@@ -46,11 +43,21 @@ or use [docker-compose.yml](https://github.com/qdm12/caddy-scratch/blob/master/d
 docker-compose up -d
 ```
 
-### Environment variables
+### Plugins
 
-| Environment variable | Default | Possible values | Description |
-| --- | --- | --- | --- |
-| `` | `` | `` | |
+If you want to have for example the `minify` and the `ipfilter` plugins for example, build the image with:
+
+```sh
+docker build -t qmcgaw/caddy --build-arg PLUGINS=minify,ipfilter https://github.com/qdm12/caddy-scratch.git
+```
+
+### Re-enable telemetry
+
+Telemetry is disabled by default. You can enable it by building the image with:
+
+```sh
+docker build -t qmcgaw/caddy --build-arg TELEMETRY=true https://github.com/qdm12/caddy-scratch.git
+```
 
 ## TODOs
 
@@ -62,3 +69,9 @@ docker-compose up -d
 ## License
 
 This repository is under an [MIT license](https://github.com/qdm12/caddy-scratch/master/license)
+
+## Thanks
+
+- To the Caddy developers and mholt especially
+- To the Caddy plugins developers
+- To abiosoft for helping me out building this Docker image

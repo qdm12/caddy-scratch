@@ -1,7 +1,6 @@
 version: '3'
 services:
   caddy:
-    build: https://github.com/qdm12/caddy-scratch.git
     image: qmcgaw/caddy-scratch
     container_name: caddy
     volumes:
@@ -13,5 +12,4 @@ services:
       - 80:8080/tcp
       - 443:8443/tcp
       - 2015:2015/tcp
-    #environment:
     restart: always
