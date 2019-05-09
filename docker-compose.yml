@@ -1,7 +1,7 @@
 version: '3'
 services:
   caddy:
-    image: qmcgaw/caddy-scratch
+    image: qmcgaw/tinycaddy
     container_name: caddy
     volumes:
       - ./Caddyfile:/Caddyfile:ro
