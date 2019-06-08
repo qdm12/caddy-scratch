@@ -1,7 +1,11 @@
+ARG BASE_IMAGE_BUILDER=golang
+ARG BASE_IMAGE=alpine
 ARG ALPINE_VERSION=3.9
 ARG GO_VERSION=1.12.5
 
-FROM golang:${GO_VERSION}-alpine${ALPINE_VERSION} AS builder
+FROM ${BASE_IMAGE_BUILDER}:${GO_VERSION}-alpine${ALPINE_VERSION} AS builder
+ARG GOARCH=amd64
+ARG GOARM=
 ARG VERSION=v1.0.0
 ARG PLUGINS=
 ARG TELEMETRY=false
@@ -9,7 +13,7 @@ RUN apk add --progress --update git gcc musl-dev ca-certificates
 WORKDIR /go/src/github.com/mholt/caddy
 RUN git clone --branch ${VERSION} --single-branch --depth 1 https://github.com/mholt/caddy /go/src/github.com/mholt/caddy && \
     $TELEMETRY || sed -i 's/var EnableTelemetry = true/var EnableTelemetry = false/' /go/src/github.com/mholt/caddy/caddy/caddymain/run.go
-RUN GOOS=linux GOARCH=amd64 go get -v github.com/abiosoft/caddyplug/caddyplug
+RUN GOOS=linux GOARCH=${GOARCH} GOARM=${GOARM} go get -v github.com/abiosoft/caddyplug/caddyplug
 ENV GO111MODULE=on
 RUN mkdir /plugins && \
     for plugin in $(echo $PLUGINS | tr "," " "); do \
@@ -20,7 +24,8 @@ RUN go mod init caddy
 RUN go get -v github.com/mholt/caddy@${VERSION}
 RUN cp -r /plugins/. .
 COPY main.go .
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -ldflags="-s -w" -o caddy
+RUN go test -v ./...
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=${GOARCH} GOARM=${GOARM} go build -a -installsuffix cgo -ldflags="-s -w" -o caddy
 
 FROM alpine:${ALPINE_VERSION} AS alpine
 RUN apk --update add ca-certificates

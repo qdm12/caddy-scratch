@@ -31,25 +31,65 @@ Features:
 - Runs **without** root
 - Plugins can easily be plugged in
 - Scratch based, so less attack surface
+- Instructions to build for ARM devices below
 
 ## Setup
 
-Use the following command:
+1. <details><summary>CLICK IF YOU HAVE AN ARM DEVICE</summary><p>
 
-```bash
-docker run -d \
--v $(pwd)/Caddyfile:/Caddyfile:ro \
--v $(pwd)/data:/data \
--v $(pwd)/srv:/srv:ro \
--p 80:8080/tcp -p 443:8443/tcp -p 2015:2015/tcp \
-qmcgaw/caddy-scratch
-```
+    - If you have a ARM 32 bit v6 architecture
 
-or use [docker-compose.yml](https://github.com/qdm12/caddy-scratch/blob/master/docker-compose.yml) with:
+        ```sh
+        docker build -t qmcgaw/caddy-scratch \
+        --build-arg BASE_IMAGE_BUILDER=arm32v6/golang \
+        --build-arg BASE_IMAGE=arm32v6/alpine \
+        --build-arg GOARCH=arm \
+        --build-arg GOARM=6 \
+        --build-arg PLUGINS= \
+        https://github.com/qdm12/caddy-scratch.git
+        ```
 
-```bash
-docker-compose up -d
-```
+    - If you have a ARM 32 bit v7 architecture
+
+        ```sh
+        docker build -t qmcgaw/caddy-scratch \
+        --build-arg BASE_IMAGE_BUILDER=arm32v7/golang \
+        --build-arg BASE_IMAGE=arm32v7/alpine \
+        --build-arg GOARCH=arm \
+        --build-arg GOARM=7 \
+        --build-arg PLUGINS= \
+        https://github.com/qdm12/caddy-scratch.git
+        ```
+
+    - If you have a ARM 64 bit v8 architecture
+
+        ```sh
+        docker build -t qmcgaw/caddy-scratch \
+        --build-arg BASE_IMAGE_BUILDER=arm64v8/golang \
+        --build-arg BASE_IMAGE=arm64v8/alpine \
+        --build-arg GOARCH=arm64 \
+        --build-arg PLUGINS= \
+        https://github.com/qdm12/caddy-scratch.git
+        ```
+
+    </p></details>
+
+1. Launch the container
+
+    ```sh
+    docker run -d \
+    -v $(pwd)/Caddyfile:/Caddyfile:ro \
+    -v $(pwd)/data:/data \
+    -v $(pwd)/srv:/srv:ro \
+    -p 80:8080/tcp -p 443:8443/tcp -p 2015:2015/tcp \
+    qmcgaw/caddy-scratch
+    ```
+
+    or use [docker-compose.yml](https://github.com/qdm12/caddy-scratch/blob/master/docker-compose.yml) with:
+
+    ```sh
+    docker-compose up -d
+    ```
 
 ### Plugins
 
