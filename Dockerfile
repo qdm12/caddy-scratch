@@ -1,7 +1,7 @@
 ARG BASE_IMAGE_BUILDER=golang
 ARG BASE_IMAGE=alpine
-ARG ALPINE_VERSION=3.9
-ARG GO_VERSION=1.12.5
+ARG ALPINE_VERSION=3.10
+ARG GO_VERSION=1.12.6
 
 FROM ${BASE_IMAGE_BUILDER}:${GO_VERSION}-alpine${ALPINE_VERSION} AS builder
 ARG GOARCH=amd64
@@ -11,10 +11,10 @@ ARG PLUGINS=
 ARG TELEMETRY=false
 RUN apk add --progress --update git gcc musl-dev ca-certificates
 WORKDIR /go/src/github.com/mholt/caddy
-RUN git clone --branch ${VERSION} --single-branch --depth 1 https://github.com/mholt/caddy /go/src/github.com/mholt/caddy && \
-    $TELEMETRY || sed -i 's/var EnableTelemetry = true/var EnableTelemetry = false/' /go/src/github.com/mholt/caddy/caddy/caddymain/run.go
-RUN GOOS=linux GOARCH=${GOARCH} GOARM=${GOARM} go get -v github.com/abiosoft/caddyplug/caddyplug
+RUN git clone --branch ${VERSION} --single-branch --depth 1 https://github.com/mholt/caddy /go/src/github.com/mholt/caddy 
+RUN $TELEMETRY || sed -i 's/var EnableTelemetry = true/var EnableTelemetry = false/' /go/src/github.com/mholt/caddy/caddy/caddymain/run.go
 ENV GO111MODULE=on
+RUN GOOS=linux GOARCH=${GOARCH} GOARM=${GOARM} go get -v github.com/abiosoft/caddyplug/caddyplug
 RUN mkdir /plugins && \
     for plugin in $(echo $PLUGINS | tr "," " "); do \
     printf "package main\nimport _ \"$(GO111MODULE=off GOOS=linux GOARCH=amd64 caddyplug package $plugin)\"" > /plugins/$plugin.go; \
