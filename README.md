@@ -19,7 +19,7 @@
 
 | Image size | RAM usage | CPU usage |
 | --- | --- | --- |
-| 16.6MB | 18MB | Low |
+| 15.8MB | 18MB | Low |
 
 It is based on:
 
@@ -42,7 +42,6 @@ Features:
         ```sh
         docker build -t qmcgaw/caddy-scratch \
         --build-arg BASE_IMAGE_BUILDER=arm32v6/golang \
-        --build-arg BASE_IMAGE=arm32v6/alpine \
         --build-arg GOARCH=arm \
         --build-arg GOARM=6 \
         --build-arg PLUGINS= \
@@ -54,7 +53,6 @@ Features:
         ```sh
         docker build -t qmcgaw/caddy-scratch \
         --build-arg BASE_IMAGE_BUILDER=arm32v7/golang \
-        --build-arg BASE_IMAGE=arm32v7/alpine \
         --build-arg GOARCH=arm \
         --build-arg GOARM=7 \
         --build-arg PLUGINS= \
@@ -66,7 +64,6 @@ Features:
         ```sh
         docker build -t qmcgaw/caddy-scratch \
         --build-arg BASE_IMAGE_BUILDER=arm64v8/golang \
-        --build-arg BASE_IMAGE=arm64v8/alpine \
         --build-arg GOARCH=arm64 \
         --build-arg PLUGINS= \
         https://github.com/qdm12/caddy-scratch.git
@@ -117,6 +114,7 @@ docker build -t qmcgaw/caddy --build-arg TELEMETRY=true https://github.com/qdm12
 
 ## TODOs
 
+- [ ] Tzdata
 - [ ] Use lists of IPs to block with ipfilter with `import blockIps`
 - [ ] Healthcheck for Caddy
 - [ ] Intelligent IP blocking

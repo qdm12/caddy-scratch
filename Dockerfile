@@ -1,5 +1,4 @@
 ARG BASE_IMAGE_BUILDER=golang
-ARG BASE_IMAGE=alpine
 ARG ALPINE_VERSION=3.10
 ARG GO_VERSION=1.12.6
 
@@ -9,26 +8,25 @@ ARG GOARM=
 ARG VERSION=v1.0.0
 ARG PLUGINS=
 ARG TELEMETRY=false
-RUN apk add --progress --update git gcc musl-dev ca-certificates
-WORKDIR /go/src/github.com/mholt/caddy
-RUN git clone --branch ${VERSION} --single-branch --depth 1 https://github.com/mholt/caddy /go/src/github.com/mholt/caddy 
-RUN $TELEMETRY || sed -i 's/var EnableTelemetry = true/var EnableTelemetry = false/' /go/src/github.com/mholt/caddy/caddy/caddymain/run.go
 ENV GO111MODULE=on
-RUN GOOS=linux GOARCH=${GOARCH} GOARM=${GOARM} go get -v github.com/abiosoft/caddyplug/caddyplug
-RUN mkdir /plugins && \
-    for plugin in $(echo $PLUGINS | tr "," " "); do \
-    printf "package main\nimport _ \"$(GO111MODULE=off GOOS=linux GOARCH=amd64 caddyplug package $plugin)\"" > /plugins/$plugin.go; \
-    done
+RUN apk add -q --progress --update git gcc musl-dev ca-certificates
+RUN git clone --branch ${VERSION} --single-branch --depth 1 https://github.com/mholt/caddy /go/src/github.com/mholt/caddy 2> /dev/null && \
+    git clone --single-branch --depth 1 https://github.com/caddyserver/dnsproviders /go/src/github.com/caddyserver/dnsproviders 2> /dev/null
+RUN GOOS=linux GOARCH=${GOARCH} GOARM=${GOARM} go get github.com/abiosoft/caddyplug/caddyplug 2> /dev/null
 WORKDIR /caddy
-RUN go mod init caddy
-RUN go get -v github.com/mholt/caddy@${VERSION}
-RUN cp -r /plugins/. .
-COPY main.go .
-RUN go test -v ./...
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=${GOARCH} GOARM=${GOARM} go build -a -installsuffix cgo -ldflags="-s -w" -o caddy
-
-FROM alpine:${ALPINE_VERSION} AS alpine
-RUN apk --update add ca-certificates
+RUN for plugin in $(echo $PLUGINS | tr "," " "); do \
+    if [ -f "/github.com/caddyserver/dnsproviders/$plugin/$plugin.go" ]; then \
+    mkdir -p "dnsproviders/$plugin" && \
+    cp -f "/go/src/github.com/caddyserver/dnsproviders/$plugin/$plugin.go" "dnsproviders/$plugin/$plugin.go" && \
+    printf "package main\nimport _ \"caddy/dnsproviders/$plugin\"" > "$plugin.go"; \
+    else \
+    GO111MODULE=off GOOS=linux GOARCH=${GOARCH} GOARM=${GOARM} caddyplug package "$plugin" 2> /dev/null; \
+    fi \
+    done
+RUN go mod init caddy && \
+    GOOS=linux GOARCH=${GOARCH} GOARM=${GOARM} go get github.com/mholt/caddy@${VERSION} 2> /dev/null && \
+    printf "package main\nimport \"github.com/mholt/caddy/caddy/caddymain\"\n\nfunc main() {\n    caddymain.EnableTelemetry = $TELEMETRY\n    caddymain.Run()\n}\n" > main.go
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=${GOARCH} GOARM=${GOARM} go build -a -installsuffix cgo -ldflags="-s -w" 2> /dev/null
 
 FROM scratch
 ARG VERSION=v1.0.0
@@ -46,17 +44,16 @@ LABEL org.label-schema.schema-version="1.0.0-rc1" \
     org.label-schema.docker.cmd.devel="docker run -it --rm -v $(pwd)/Caddyfile:/Caddyfile:ro -p 80:8080/tcp -p 443:8443/tcp -p 2015:2015/tcp qmcgaw/caddy-scratch" \
     org.label-schema.docker.params="" \
     org.label-schema.version="${VERSION}" \
-    image-size="16.6MB" \
+    image-size="15.8MB" \
     ram-usage="18MB but depends on traffic" \
     cpu-usage="Low but depends on traffic"
-COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 EXPOSE 8080 8443 2015
-# HEALTHCHECK --interval=100s --timeout=3s --start-period=10s --retries=1 CMD ["/healthcheck"]   
 ENV HOME=/ \
     CADDYPATH=/data
 VOLUME ["/data"]
+ENTRYPOINT ["/caddy","-conf","/Caddyfile","-log","stdout"]
+CMD ["-agree","-http-port","8080","-https-port","8443"]
 USER 1000
-ENTRYPOINT ["/caddy","-conf","/Caddyfile","-log","stdout","-agree"]
-CMD ["-http-port","8080","-https-port","8443"]
 # see https://caddyserver.com/docs/cli
-COPY --from=builder /caddy/caddy /caddy
+COPY --from=builder --chown=1000 /caddy/caddy /caddy

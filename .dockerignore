@@ -1,7 +1,7 @@
+.git
+hooks
 .gitignore
-.travis.yml
-README.md
 docker-compose.yml
-.git/
+LICENSE
+README.md
 title.png
-*.exe
