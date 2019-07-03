@@ -10,23 +10,26 @@ ARG PLUGINS=
 ARG TELEMETRY=false
 ENV GO111MODULE=on
 RUN apk add -q --progress --update git gcc musl-dev ca-certificates
-RUN git clone --branch ${VERSION} --single-branch --depth 1 https://github.com/mholt/caddy /go/src/github.com/mholt/caddy 2> /dev/null && \
-    git clone --single-branch --depth 1 https://github.com/caddyserver/dnsproviders /go/src/github.com/caddyserver/dnsproviders 2> /dev/null
-RUN GOOS=linux GOARCH=${GOARCH} GOARM=${GOARM} go get github.com/abiosoft/caddyplug/caddyplug 2> /dev/null
+RUN git clone --branch ${VERSION} --single-branch --depth 1 https://github.com/mholt/caddy /go/src/github.com/mholt/caddy > /dev/null 2>&1 && \
+    git clone --single-branch --depth 1 https://github.com/caddyserver/dnsproviders /go/src/github.com/caddyserver/dnsproviders > /dev/null 2>&1
+RUN GOOS=linux GOARCH=${GOARCH} GOARM=${GOARM} go get github.com/abiosoft/caddyplug/caddyplug > /dev/null 2>&1
 WORKDIR /caddy
-RUN for plugin in $(echo $PLUGINS | tr "," " "); do \
+RUN set -e; \
+    for plugin in $(echo $PLUGINS | tr "," " "); do \
     if [ -f "/github.com/caddyserver/dnsproviders/$plugin/$plugin.go" ]; then \
-    mkdir -p "dnsproviders/$plugin" && \
-    cp -f "/go/src/github.com/caddyserver/dnsproviders/$plugin/$plugin.go" "dnsproviders/$plugin/$plugin.go" && \
-    printf "package main\nimport _ \"caddy/dnsproviders/$plugin\"" > "$plugin.go"; \
+    PACKAGE="caddy/dnsproviders/$plugin"; \
+    mkdir -p "dnsproviders/$plugin"; \
+    cp -f "/go/src/github.com/caddyserver/dnsproviders/$plugin/$plugin.go" "dnsproviders/$plugin/$plugin.go"; \
     else \
-    GO111MODULE=off GOOS=linux GOARCH=${GOARCH} GOARM=${GOARM} caddyplug package "$plugin" 2> /dev/null; \
-    fi \
+    PACKAGE=`GO111MODULE=off GOOS=linux GOARCH=${GOARCH} GOARM=${GOARM} caddyplug package "$plugin"` 2> /dev/null; \
+    fi; \
+    printf "package main\nimport _ \"$PACKAGE\"" > "$plugin.go"; \
+    unset -v PACKAGE; \
     done
-RUN go mod init caddy && \
-    GOOS=linux GOARCH=${GOARCH} GOARM=${GOARM} go get github.com/mholt/caddy@${VERSION} 2> /dev/null && \
+RUN go mod init caddy > /dev/null 2>&1 && \
+    GOOS=linux GOARCH=${GOARCH} GOARM=${GOARM} go get github.com/mholt/caddy@${VERSION} > /dev/null 2>&1 && \
     printf "package main\nimport \"github.com/mholt/caddy/caddy/caddymain\"\n\nfunc main() {\n    caddymain.EnableTelemetry = $TELEMETRY\n    caddymain.Run()\n}\n" > main.go
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=${GOARCH} GOARM=${GOARM} go build -a -installsuffix cgo -ldflags="-s -w" 2> /dev/null
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=${GOARCH} GOARM=${GOARM} go build -a -ldflags="-s -w" > /dev/null 2>&1
 
 FROM scratch
 ARG VERSION=v1.0.0
@@ -52,8 +55,8 @@ EXPOSE 8080 8443 2015
 ENV HOME=/ \
     CADDYPATH=/data
 VOLUME ["/data"]
-ENTRYPOINT ["/caddy","-conf","/Caddyfile","-log","stdout"]
-CMD ["-agree","-http-port","8080","-https-port","8443"]
+ENTRYPOINT ["/caddy"]
+CMD ["-conf","/Caddyfile","-log","stdout","-agree","-http-port","8080","-https-port","8443"]
 USER 1000
 # see https://caddyserver.com/docs/cli
 COPY --from=builder --chown=1000 /caddy/caddy /caddy
