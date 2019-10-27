@@ -35,21 +35,17 @@ FROM scratch
 ARG VERSION=v1.0.3
 ARG BUILD_DATE
 ARG VCS_REF
-LABEL org.label-schema.schema-version="1.0.0-rc1" \
-    maintainer="quentin.mcgaw@gmail.com" \
-    org.label-schema.build-date=$BUILD_DATE \
-    org.label-schema.vcs-ref=$VCS_REF \
-    org.label-schema.vcs-url="https://github.com/qdm12/caddy-scratch" \
-    org.label-schema.url="https://github.com/qdm12/caddy-scratch" \
-    org.label-schema.vcs-description="Caddy server 1.0.0 on a Scratch base image" \
-    org.label-schema.vcs-usage="https://github.com/qdm12/caddy-scratch/blob/master/README.md#setup" \
-    org.label-schema.docker.cmd="docker run -d -v $(pwd)/Caddyfile:/Caddyfile:ro -v $(pwd)/data:/data -v $(pwd)/srv:/srv:ro -p 80:8080/tcp -p 443:8443/tcp -p 2015:2015/tcp qmcgaw/caddy-scratch" \
-    org.label-schema.docker.cmd.devel="docker run -it --rm -v $(pwd)/Caddyfile:/Caddyfile:ro -p 80:8080/tcp -p 443:8443/tcp -p 2015:2015/tcp qmcgaw/caddy-scratch" \
-    org.label-schema.docker.params="" \
-    org.label-schema.version="${VERSION}" \
-    image-size="15.8MB" \
-    ram-usage="18MB but depends on traffic" \
-    cpu-usage="Low but depends on traffic"
+LABEL \
+    org.opencontainers.image.authors="quentin.mcgaw@gmail.com" \
+    org.opencontainers.image.created=$BUILD_DATE \
+    org.opencontainers.image.version="" \
+    org.opencontainers.image.revision=$VCS_REF \
+    org.opencontainers.image.url="https://github.com/qdm12/caddy-scratch" \
+    org.opencontainers.image.documentation="https://github.com/qdm12/caddy-scratch/blob/master/README.md" \
+    org.opencontainers.image.source="https://github.com/qdm12/caddy-scratch" \
+    org.opencontainers.image.title="caddy-scratch" \
+    org.opencontainers.image.description="Caddy server ${VERSION} on a Scratch base image" \
+    image-size="16.7MB"
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 COPY --from=builder /usr/share/zoneinfo /usr/share/zoneinfo
 EXPOSE 8080 8443 2015

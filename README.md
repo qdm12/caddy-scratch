@@ -19,7 +19,7 @@
 
 | Image size | RAM usage | CPU usage |
 | --- | --- | --- |
-| 15.8MB | 18MB | Low |
+| 16.7MB | 18MB | Low |
 
 It is based on:
 
