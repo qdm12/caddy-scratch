@@ -1,6 +1,6 @@
 # Caddy Scratch Docker
 
-*Caddy server 1.0.0 with optional plugins on a Scratch Docker image*
+*Caddy server 1.0.3 with optional plugins on a Scratch Docker image*
 
 [![caddy-scratch](https://github.com/qdm12/caddy-scratch/raw/master/title.jpg)](https://hub.docker.com/r/qmcgaw/caddy-scratch)
 
@@ -24,7 +24,7 @@
 It is based on:
 
 - [Scratch](https://hub.docker.com/_/scratch/)
-- [Caddy 1.0.0](https://github.com/mholt/caddy) built with Go 1.12.6 and Alpine 3.10
+- [Caddy 1.0.3](https://github.com/mholt/caddy) built with Go 1.3 and Alpine 3.10
 
 Features:
 

@@ -1,11 +1,11 @@
 ARG BASE_IMAGE_BUILDER=golang
 ARG ALPINE_VERSION=3.10
-ARG GO_VERSION=1.12.6
+ARG GO_VERSION=1.13
 
 FROM ${BASE_IMAGE_BUILDER}:${GO_VERSION}-alpine${ALPINE_VERSION} AS builder
 ARG GOARCH=amd64
 ARG GOARM=
-ARG VERSION=v1.0.0
+ARG VERSION=v1.0.3
 ARG PLUGINS=
 ARG TELEMETRY=false
 ENV GO111MODULE=on
@@ -27,12 +27,12 @@ RUN set -e; \
     unset -v PACKAGE; \
     done
 RUN go mod init caddy > /dev/null 2>&1 && \
-    GOOS=linux GOARCH=${GOARCH} GOARM=${GOARM} go get github.com/mholt/caddy@${VERSION} > /dev/null 2>&1 && \
-    printf "package main\nimport \"github.com/mholt/caddy/caddy/caddymain\"\n\nfunc main() {\n    caddymain.EnableTelemetry = $TELEMETRY\n    caddymain.Run()\n}\n" > main.go
+    GOOS=linux GOARCH=${GOARCH} GOARM=${GOARM} go get github.com/caddyserver/caddy@${VERSION} > /dev/null 2>&1 && \
+    printf "package main\nimport \"github.com/caddyserver/caddy/caddy/caddymain\"\n\nfunc main() {\n    caddymain.EnableTelemetry = $TELEMETRY\n    caddymain.Run()\n}\n" > main.go
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=${GOARCH} GOARM=${GOARM} go build -a -ldflags="-s -w" > /dev/null 2>&1
 
 FROM scratch
-ARG VERSION=v1.0.0
+ARG VERSION=v1.0.3
 ARG BUILD_DATE
 ARG VCS_REF
 LABEL org.label-schema.schema-version="1.0.0-rc1" \
