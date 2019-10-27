@@ -9,7 +9,7 @@ ARG VERSION=v1.0.3
 ARG PLUGINS=
 ARG TELEMETRY=false
 ENV GO111MODULE=on
-RUN apk add -q --progress --update git gcc musl-dev ca-certificates
+RUN apk add -q --progress --update --no-cache git gcc musl-dev ca-certificates tzdata
 RUN git clone --branch ${VERSION} --single-branch --depth 1 https://github.com/mholt/caddy /go/src/github.com/mholt/caddy > /dev/null 2>&1 && \
     git clone --single-branch --depth 1 https://github.com/caddyserver/dnsproviders /go/src/github.com/caddyserver/dnsproviders > /dev/null 2>&1
 RUN GOOS=linux GOARCH=${GOARCH} GOARM=${GOARM} go get github.com/abiosoft/caddyplug/caddyplug > /dev/null 2>&1
@@ -51,9 +51,11 @@ LABEL org.label-schema.schema-version="1.0.0-rc1" \
     ram-usage="18MB but depends on traffic" \
     cpu-usage="Low but depends on traffic"
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+COPY --from=builder /usr/share/zoneinfo /usr/share/zoneinfo
 EXPOSE 8080 8443 2015
 ENV HOME=/ \
-    CADDYPATH=/data
+    CADDYPATH=/data \
+    TZ=America/Montreal
 VOLUME ["/data"]
 ENTRYPOINT ["/caddy"]
 CMD ["-conf","/Caddyfile","-log","stdout","-agree","-http-port","8080","-https-port","8443"]

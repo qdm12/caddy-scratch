@@ -78,6 +78,7 @@ Features:
     -v $(pwd)/Caddyfile:/Caddyfile:ro \
     -v $(pwd)/data:/data \
     -v $(pwd)/srv:/srv:ro \
+    -e TZ=America/Montreal \
     -p 80:8080/tcp -p 443:8443/tcp -p 2015:2015/tcp \
     qmcgaw/caddy-scratch
     ```
