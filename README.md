@@ -19,12 +19,12 @@
 
 | Image size | RAM usage | CPU usage |
 | --- | --- | --- |
-| 16.7MB | 18MB | Low |
+| 18.2MB | 20MB | Low |
 
 It is based on:
 
 - [Scratch](https://hub.docker.com/_/scratch/)
-- [Caddy 1.0.3](https://github.com/mholt/caddy) built with Go 1.3 and Alpine 3.10
+- [Caddy 1.0.4](https://github.com/mholt/caddy) built with Go 1.13.7 and Alpine 3.11
 
 Features:
 
@@ -37,37 +37,11 @@ Features:
 
 1. <details><summary>CLICK IF YOU HAVE AN ARM DEVICE</summary><p>
 
-    - If you have a ARM 32 bit v6 architecture
+    You need to build the Docker image on your device with
 
-        ```sh
-        docker build -t qmcgaw/caddy-scratch \
-        --build-arg BASE_IMAGE_BUILDER=arm32v6/golang \
-        --build-arg GOARCH=arm \
-        --build-arg GOARM=6 \
-        --build-arg PLUGINS= \
-        https://github.com/qdm12/caddy-scratch.git
-        ```
-
-    - If you have a ARM 32 bit v7 architecture
-
-        ```sh
-        docker build -t qmcgaw/caddy-scratch \
-        --build-arg BASE_IMAGE_BUILDER=arm32v7/golang \
-        --build-arg GOARCH=arm \
-        --build-arg GOARM=7 \
-        --build-arg PLUGINS= \
-        https://github.com/qdm12/caddy-scratch.git
-        ```
-
-    - If you have a ARM 64 bit v8 architecture
-
-        ```sh
-        docker build -t qmcgaw/caddy-scratch \
-        --build-arg BASE_IMAGE_BUILDER=arm64v8/golang \
-        --build-arg GOARCH=arm64 \
-        --build-arg PLUGINS= \
-        https://github.com/qdm12/caddy-scratch.git
-        ```
+    ```sh
+    docker build -t qmcgaw/caddy-scratch https://github.com/qdm12/caddy-scratch.git
+    ```
 
     </p></details>
 
