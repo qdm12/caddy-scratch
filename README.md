@@ -18,7 +18,7 @@
 It is based on:
 
 - [Scratch](https://hub.docker.com/_/scratch/)
-- [Caddy 1.0.4](https://github.com/mholt/caddy) built with Go 1.13.7 and Alpine 3.11
+- [Caddy 1.0.4](https://github.com/mholt/caddy) built with Go 1.14 on Alpine 3.11
 
 Features:
 
