@@ -1,23 +1,19 @@
 # Caddy Scratch Docker
 
-*Caddy server 1.0.3 with optional plugins on a Scratch Docker image*
+*Caddy server 1.0.4 all in 17.3MB without root, without OS and with optional Caddy plugins*
 
 [![caddy-scratch](https://github.com/qdm12/caddy-scratch/raw/master/title.jpg)](https://hub.docker.com/r/qmcgaw/caddy-scratch)
 
 [![Build Status](https://travis-ci.org/qdm12/REPONAME_GITHUB.svg?branch=master)](https://travis-ci.org/qdm12/REPONAME_GITHUB)
-
-[![GitHub last commit](https://img.shields.io/github/last-commit/qdm12/caddy-scratch.svg)](https://github.com/qdm12/caddy-scratch/issues)
-[![GitHub commit activity](https://img.shields.io/github/commit-activity/y/qdm12/caddy-scratch.svg)](https://github.com/qdm12/caddy-scratch/issues)
-[![GitHub issues](https://img.shields.io/github/issues/qdm12/caddy-scratch.svg)](https://github.com/qdm12/caddy-scratch/issues)
-
 [![Docker Pulls](https://img.shields.io/docker/pulls/qmcgaw/caddy-scratch.svg)](https://hub.docker.com/r/qmcgaw/caddy-scratch)
 [![Docker Stars](https://img.shields.io/docker/stars/qmcgaw/caddy-scratch.svg)](https://hub.docker.com/r/qmcgaw/caddy-scratch)
 [![Image size](https://images.microbadger.com/badges/image/qmcgaw/caddy-scratch.svg)](https://microbadger.com/images/qmcgaw/caddy-scratch)
 [![Image version](https://images.microbadger.com/badges/version/qmcgaw/caddy-scratch.svg)](https://microbadger.com/images/qmcgaw/caddy-scratch)
 
-| Image size | RAM usage | CPU usage |
-| --- | --- | --- |
-| 18.2MB | 20MB | Low |
+[![Join Slack channel](https://img.shields.io/badge/slack-@qdm12-yellow.svg?logo=slack)](https://join.slack.com/t/qdm12/shared_invite/enQtOTE0NjcxNTM1ODc5LTYyZmVlOTM3MGI4ZWU0YmJkMjUxNmQ4ODQ2OTAwYzMxMTlhY2Q1MWQyOWUyNjc2ODliNjFjMDUxNWNmNzk5MDk)
+[![GitHub last commit](https://img.shields.io/github/last-commit/qdm12/REPONAME_GITHUB.svg)](https://github.com/qdm12/REPONAME_GITHUB/issues)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/y/qdm12/REPONAME_GITHUB.svg)](https://github.com/qdm12/REPONAME_GITHUB/issues)
+[![GitHub issues](https://img.shields.io/github/issues/qdm12/REPONAME_GITHUB.svg)](https://github.com/qdm12/REPONAME_GITHUB/issues)
 
 It is based on:
 
@@ -27,8 +23,8 @@ It is based on:
 Features:
 
 - Runs **without** root
-- Plugins can easily be plugged in
 - Scratch based, so less attack surface
+- Plugins can easily be added by building the Docker image with a build argument
 - Compatible with `amd64`, `386`, `arm64`, `arm32v7`, `arm32v6`, `ppc64le` and `s390x` CPU architectures
 - [Docker image tags and sizes](https://hub.docker.com/r/qmcgaw/caddy-scratch/tags)
 
@@ -64,7 +60,7 @@ Features:
 
 ### Plugins
 
-If you want to have for example the `minify` and the `ipfilter` plugins for example, build the image with:
+If you want to have for example the `minify` and the `ipfilter` plugins, build the image with:
 
 ```sh
 docker build -t qmcgaw/caddy --build-arg PLUGINS=minify,ipfilter https://github.com/qdm12/caddy-scratch.git
@@ -80,7 +76,7 @@ docker build -t qmcgaw/caddy --build-arg TELEMETRY=true https://github.com/qdm12
 
 ## Little tricks
 
-- Hot reload the Caddyfile with
+- Assuming your container is called `caddy`, you can hot reload the Caddyfile with
 
     ```sh
     docker kill --signal=USR1 caddy
@@ -88,7 +84,6 @@ docker build -t qmcgaw/caddy --build-arg TELEMETRY=true https://github.com/qdm12
 
 ## TODOs
 
-- [ ] Tzdata
 - [ ] Use lists of IPs to block with ipfilter with `import blockIps`
 - [ ] Healthcheck for Caddy
 - [ ] Intelligent IP blocking
