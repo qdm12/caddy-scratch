@@ -25,7 +25,7 @@ Features:
 - Runs **without** root
 - Scratch based, so less attack surface
 - Plugins can easily be added by building the Docker image with a build argument
-- Compatible with `amd64`, `386`, `arm64`, `arm32v7`, `arm32v6`, `ppc64le` and `s390x` CPU architectures
+- Compatible with `amd64`, `386` and `arm64` CPU architectures
 - [Docker image tags and sizes](https://hub.docker.com/r/qmcgaw/caddy-scratch/tags)
 
 ## Setup
