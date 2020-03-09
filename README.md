@@ -4,7 +4,7 @@
 
 [![caddy-scratch](https://github.com/qdm12/caddy-scratch/raw/master/title.jpg)](https://hub.docker.com/r/qmcgaw/caddy-scratch)
 
-[![Docker Build Status](https://img.shields.io/docker/cloud/build/qmcgaw/caddy-scratch.svg)](https://hub.docker.com/r/qmcgaw/caddy-scratch)
+[![Build Status](https://travis-ci.org/qdm12/REPONAME_GITHUB.svg?branch=master)](https://travis-ci.org/qdm12/REPONAME_GITHUB)
 
 [![GitHub last commit](https://img.shields.io/github/last-commit/qdm12/caddy-scratch.svg)](https://github.com/qdm12/caddy-scratch/issues)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/qdm12/caddy-scratch.svg)](https://github.com/qdm12/caddy-scratch/issues)
@@ -12,8 +12,6 @@
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/qmcgaw/caddy-scratch.svg)](https://hub.docker.com/r/qmcgaw/caddy-scratch)
 [![Docker Stars](https://img.shields.io/docker/stars/qmcgaw/caddy-scratch.svg)](https://hub.docker.com/r/qmcgaw/caddy-scratch)
-[![Docker Automated](https://img.shields.io/docker/cloud/automated/qmcgaw/caddy-scratch.svg)](https://hub.docker.com/r/qmcgaw/caddy-scratch)
-
 [![Image size](https://images.microbadger.com/badges/image/qmcgaw/caddy-scratch.svg)](https://microbadger.com/images/qmcgaw/caddy-scratch)
 [![Image version](https://images.microbadger.com/badges/version/qmcgaw/caddy-scratch.svg)](https://microbadger.com/images/qmcgaw/caddy-scratch)
 
@@ -31,7 +29,8 @@ Features:
 - Runs **without** root
 - Plugins can easily be plugged in
 - Scratch based, so less attack surface
-- Instructions to build for ARM devices below
+- Compatible with `amd64`, `386`, `arm64`, `arm32v7`, `arm32v6`, `ppc64le` and `s390x` CPU architectures
+- [Docker image tags and sizes](https://hub.docker.com/r/qmcgaw/caddy-scratch/tags)
 
 ## Setup
 
