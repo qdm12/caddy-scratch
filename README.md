@@ -30,16 +30,6 @@ Features:
 
 ## Setup
 
-1. <details><summary>CLICK IF YOU HAVE AN ARM DEVICE</summary><p>
-
-    You need to build the Docker image on your device with
-
-    ```sh
-    docker build -t qmcgaw/caddy-scratch https://github.com/qdm12/caddy-scratch.git
-    ```
-
-    </p></details>
-
 1. Launch the container
 
     ```sh
