@@ -1,3 +1,0 @@
-#!/bin/bash
-
-curl -X POST https://hooks.microbadger.com/images/qmcgaw/${DOCKER_REPO}/0cfauMomB4AqCj0ulbm2-WSIf-4=
