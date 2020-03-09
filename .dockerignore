@@ -2,6 +2,7 @@
 hooks
 .gitignore
 docker-compose.yml
+Dockerfile
 LICENSE
 README.md
-title.png
+title.svg

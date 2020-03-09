@@ -2,7 +2,7 @@
 
 *Caddy server 1.0.4 all in 17.3MB without root, without OS and with optional Caddy plugins*
 
-[![caddy-scratch](https://github.com/qdm12/caddy-scratch/raw/master/title.jpg)](https://hub.docker.com/r/qmcgaw/caddy-scratch)
+<img height="200" src="title.svg?sanitize=true">
 
 [![Build Status](https://travis-ci.org/qdm12/REPONAME_GITHUB.svg?branch=master)](https://travis-ci.org/qdm12/REPONAME_GITHUB)
 [![Docker Pulls](https://img.shields.io/docker/pulls/qmcgaw/caddy-scratch.svg)](https://hub.docker.com/r/qmcgaw/caddy-scratch)
