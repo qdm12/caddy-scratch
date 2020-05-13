@@ -49,14 +49,16 @@
 
 ### Plugins
 
-### Caddy v2.0.x
+#### Caddy v2.0.x
 
 Note that many Caddy plugins **do not work yet** on Caddy 2
 
 If you want to have for example the `github.com/caddyserver/ntlm-transport` plugin, build the image with
 
 ```sh
-docker build -t qmcgaw/caddy --build-arg PLUGINS=github.com/caddyserver/ntlm-transport https://github.com/qdm12/caddy-scratch.git
+docker build -t qmcgaw/caddy \
+    --build-arg PLUGINS=github.com/caddyserver/ntlm-transport \
+    https://github.com/qdm12/caddy-scratch.git
 ```
 
 #### Caddy v1.0.x
