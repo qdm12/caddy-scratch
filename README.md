@@ -4,7 +4,7 @@
 
 <img height="200" src="title.svg?sanitize=true">
 
-[![Build Status](https://travis-ci.org/qdm12/caddy-scratch.svg?branch=master)](https://travis-ci.org/qdm12/caddy-scratch)
+[![Build status](https://github.com/qdm12/caddy-scratch/workflows/Buildx%20latest/badge.svg)](https://github.com/qdm12/caddy-scratch/actions?query=workflow%3A%22Buildx+latest%22)
 [![Docker Pulls](https://img.shields.io/docker/pulls/qmcgaw/caddy-scratch.svg)](https://hub.docker.com/r/qmcgaw/caddy-scratch)
 [![Docker Stars](https://img.shields.io/docker/stars/qmcgaw/caddy-scratch.svg)](https://hub.docker.com/r/qmcgaw/caddy-scratch)
 [![Image size](https://images.microbadger.com/badges/image/qmcgaw/caddy-scratch.svg)](https://microbadger.com/images/qmcgaw/caddy-scratch)

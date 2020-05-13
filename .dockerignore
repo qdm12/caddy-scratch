@@ -1,8 +1,7 @@
 .git
-hooks
+.github
 .gitignore
 docker-compose.yml
-Dockerfile
 LICENSE
 README.md
 title.svg
