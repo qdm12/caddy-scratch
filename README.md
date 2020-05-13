@@ -1,6 +1,6 @@
 # Caddy Scratch Docker
 
-*Caddy server 1.0.5 all in 17.2MB without root, without OS and with optional Caddy plugins*
+*Caddy server 2.0.0 / 1.0.5 without root, without OS and with optional Caddy plugins*
 
 <img height="200" src="https://raw.githubusercontent.com/qdm12/caddy-scratch/master/title.svg?sanitize=true">
 
@@ -22,8 +22,10 @@
 - Plugins can easily be added by building the Docker image with a build argument
 - Compatible with `amd64`, `386` and `arm64` CPU architectures
 - [Docker image tags and sizes](https://hub.docker.com/r/qmcgaw/caddy-scratch/tags)
-    - `qmcgaw:caddy-scratch:v1.04` / 17.3MB / Based on [Caddy v1.0.4](https://github.com/caddyserver/caddy/releases/tag/v1.0.4)
+    - `qmcgaw:caddy-scratch` / 35.5MB / Based on [Caddy v2.0.0](https://github.com/caddyserver/caddy/releases/tag/v2.0.0)
+    - `qmcgaw:caddy-scratch:v2.00` / 35.5MB / Based on [Caddy v2.0.0](https://github.com/caddyserver/caddy/releases/tag/v2.0.0)
     - `qmcgaw:caddy-scratch:v1.05` / 17.2MB / Based on [Caddy v1.0.5](https://github.com/caddyserver/caddy/releases/tag/v1.0.5)
+    - `qmcgaw:caddy-scratch:v1.04` / 17.3MB / Based on [Caddy v1.0.4](https://github.com/caddyserver/caddy/releases/tag/v1.0.4)
 
 ## Setup
 
@@ -47,10 +49,22 @@
 
 ### Plugins
 
+### Caddy v2.0.x
+
+Note that many Caddy plugins **do not work yet** on Caddy 2
+
+If you want to have for example the `github.com/caddyserver/ntlm-transport` plugin, build the image with
+
+```sh
+docker build -t qmcgaw/caddy --build-arg PLUGINS=github.com/caddyserver/ntlm-transport https://github.com/qdm12/caddy-scratch.git
+```
+
+#### Caddy v1.0.x
+
 If you want to have for example the `minify` and the `ipfilter` plugins, build the image with:
 
 ```sh
-docker build -t qmcgaw/caddy --build-arg PLUGINS=minify,ipfilter https://github.com/qdm12/caddy-scratch.git
+docker build -t qmcgaw/caddy --build-arg PLUGINS=minify,ipfilter https://github.com/qdm12/caddy-scratch.git#v1.0.5
 ```
 
 ### Re-enable telemetry

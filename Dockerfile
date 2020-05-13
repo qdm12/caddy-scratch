@@ -2,31 +2,16 @@ ARG ALPINE_VERSION=3.11
 ARG GO_VERSION=1.14
 
 FROM golang:${GO_VERSION}-alpine${ALPINE_VERSION} AS builder
-ARG CADDY_VERSION=v1.0.5
-ARG PLUGINS=
-ARG TELEMETRY=false
-ENV GO111MODULE=on
-RUN apk add -q --progress --update --no-cache git gcc musl-dev ca-certificates tzdata
-RUN git clone --branch ${CADDY_VERSION} --single-branch --depth 1 https://github.com/mholt/caddy /go/src/github.com/mholt/caddy > /dev/null 2>&1 && \
-    git clone --single-branch --depth 1 https://github.com/caddyserver/dnsproviders /go/src/github.com/caddyserver/dnsproviders > /dev/null 2>&1
-RUN go get github.com/abiosoft/caddyplug/caddyplug > /dev/null 2>&1
+RUN apk add -q --progress --update --no-cache git musl-dev gcc ca-certificates tzdata
+ENV GO111MODULE=on \
+    CGO_ENABLED=0
+RUN go get github.com/caddyserver/xcaddy/cmd/xcaddy
+ARG CADDY_VERSION=v2.0.0
 WORKDIR /caddy
-RUN set -e; \
-    for plugin in $(echo $PLUGINS | tr "," " "); do \
-    if [ -f "/github.com/caddyserver/dnsproviders/$plugin/$plugin.go" ]; then \
-    PACKAGE="caddy/dnsproviders/$plugin"; \
-    mkdir -p "dnsproviders/$plugin"; \
-    cp -f "/go/src/github.com/caddyserver/dnsproviders/$plugin/$plugin.go" "dnsproviders/$plugin/$plugin.go"; \
-    else \
-    PACKAGE=`GO111MODULE=off caddyplug package "$plugin"` 2> /dev/null; \
-    fi; \
-    printf "package main\nimport _ \"$PACKAGE\"" > "$plugin.go"; \
-    unset -v PACKAGE; \
-    done
-RUN go mod init caddy > /dev/null 2>&1 && \
-    go get github.com/caddyserver/caddy@${CADDY_VERSION} > /dev/null 2>&1 && \
-    printf "package main\nimport \"github.com/caddyserver/caddy/caddy/caddymain\"\n\nfunc main() {\n    caddymain.EnableTelemetry = $TELEMETRY\n    caddymain.Run()\n}\n" > main.go
-RUN CGO_ENABLED=0 go build -a -ldflags="-s -w" > /dev/null 2>&1
+ARG TELEMETRY=false
+ARG PLUGINS=
+RUN for plugin in $(echo $PLUGINS | tr "," " "); do withFlags="$withFlags --with $plugin"; done && \
+    xcaddy build ${CADDY_VERSION} ${withFlags}
 
 FROM scratch
 ARG VERSION
