@@ -1,6 +1,6 @@
 # Caddy Scratch Docker
 
-*Caddy server 1.0.4 all in 17.3MB without root, without OS and with optional Caddy plugins*
+*Caddy server 1.0.5 all in 17.2MB without root, without OS and with optional Caddy plugins*
 
 <img height="200" src="https://raw.githubusercontent.com/qdm12/caddy-scratch/master/title.svg?sanitize=true">
 
@@ -15,18 +15,15 @@
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/qdm12/caddy-scratch.svg)](https://github.com/qdm12/caddy-scratch/issues)
 [![GitHub issues](https://img.shields.io/github/issues/qdm12/caddy-scratch.svg)](https://github.com/qdm12/caddy-scratch/issues)
 
-It is based on:
+## Features
 
-- [Scratch](https://hub.docker.com/_/scratch/)
-- [Caddy 1.0.4](https://github.com/mholt/caddy) built with Go 1.14 on Alpine 3.11
-
-Features:
-
+- [Scratch](https://hub.docker.com/_/scratch/) based, so less attack surface and tiny
 - Runs **without** root
-- Scratch based, so less attack surface
 - Plugins can easily be added by building the Docker image with a build argument
 - Compatible with `amd64`, `386` and `arm64` CPU architectures
 - [Docker image tags and sizes](https://hub.docker.com/r/qmcgaw/caddy-scratch/tags)
+    - `qmcgaw:caddy-scratch:v1.04` / 17.3MB / Based on [Caddy v1.0.4](https://github.com/caddyserver/caddy/releases/tag/v1.0.4)
+    - `qmcgaw:caddy-scratch:v1.05` / 17.2MB / Based on [Caddy v1.0.5](https://github.com/caddyserver/caddy/releases/tag/v1.0.5)
 
 ## Setup
 
