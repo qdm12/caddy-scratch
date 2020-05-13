@@ -5,7 +5,7 @@ FROM golang:${GO_VERSION}-alpine${ALPINE_VERSION} AS builder
 RUN apk add -q --progress --update --no-cache git musl-dev gcc ca-certificates tzdata
 ENV GO111MODULE=on \
     CGO_ENABLED=0
-RUN go get github.com/caddyserver/xcaddy/cmd/xcaddy
+RUN go get github.com/caddyserver/xcaddy/cmd/xcaddy@master
 ARG CADDY_VERSION=v2.0.0
 WORKDIR /caddy
 ARG TELEMETRY=false
