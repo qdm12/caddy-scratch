@@ -10,7 +10,6 @@ ENV GO111MODULE=on \
 RUN go get github.com/caddyserver/xcaddy/cmd/xcaddy@master
 ARG CADDY_VERSION=v2.0.0
 WORKDIR /caddy
-ARG TELEMETRY=false
 ARG PLUGINS=
 RUN for plugin in $(echo $PLUGINS | tr "," " "); do withFlags="$withFlags --with $plugin"; done && \
     xcaddy build ${CADDY_VERSION} ${withFlags}

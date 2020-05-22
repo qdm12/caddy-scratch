@@ -72,14 +72,6 @@ docker build -t qmcgaw/caddy \
     https://github.com/qdm12/caddy-scratch.git
 ```
 
-### Re-enable telemetry
-
-Telemetry is disabled by default. You can enable it by building the image with:
-
-```sh
-docker build -t qmcgaw/caddy --build-arg TELEMETRY=true https://github.com/qdm12/caddy-scratch.git
-```
-
 ## Little tricks
 
 - Assuming your container is called `caddy`, you can hot reload the Caddyfile with
