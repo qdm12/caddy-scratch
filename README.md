@@ -23,9 +23,9 @@
 - Compatible with `amd64`, `386` and `arm64` CPU architectures
 - [Docker image tags and sizes](https://hub.docker.com/r/qmcgaw/caddy-scratch/tags)
     - `qmcgaw:caddy-scratch` / 35.5MB / Based on [Caddy v2.0.0](https://github.com/caddyserver/caddy/releases/tag/v2.0.0)
-    - `qmcgaw:caddy-scratch:v2.00` / 35.5MB / Based on [Caddy v2.0.0](https://github.com/caddyserver/caddy/releases/tag/v2.0.0)
-    - `qmcgaw:caddy-scratch:v1.05` / 17.2MB / Based on [Caddy v1.0.5](https://github.com/caddyserver/caddy/releases/tag/v1.0.5)
-    - `qmcgaw:caddy-scratch:v1.04` / 17.3MB / Based on [Caddy v1.0.4](https://github.com/caddyserver/caddy/releases/tag/v1.0.4)
+    - `qmcgaw:caddy-scratch:v2.0.0` / 35.5MB / Based on [Caddy v2.0.0](https://github.com/caddyserver/caddy/releases/tag/v2.0.0)
+    - `qmcgaw:caddy-scratch:v1.0.5` / 17.2MB / Based on [Caddy v1.0.5](https://github.com/caddyserver/caddy/releases/tag/v1.0.5)
+    - `qmcgaw:caddy-scratch:v1.0.4` / 17.3MB / Based on [Caddy v1.0.4](https://github.com/caddyserver/caddy/releases/tag/v1.0.4)
 
 ## Setup
 
