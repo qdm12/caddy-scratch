@@ -3,6 +3,8 @@ ARG GO_VERSION=1.14
 
 FROM golang:${GO_VERSION}-alpine${ALPINE_VERSION} AS builder
 RUN apk add -q --progress --update --no-cache git musl-dev gcc ca-certificates tzdata
+RUN mkdir -p /caddydir/data && \
+    chmod -R 700 /caddydir
 ENV GO111MODULE=on \
     CGO_ENABLED=0
 RUN go get github.com/caddyserver/xcaddy/cmd/xcaddy@master
@@ -13,7 +15,7 @@ ARG PLUGINS=
 RUN for plugin in $(echo $PLUGINS | tr "," " "); do withFlags="$withFlags --with $plugin"; done && \
     xcaddy build ${CADDY_VERSION} ${withFlags}
 
-FROM alpine:${ALPINE_VERSION}
+FROM scratch
 ARG VERSION
 ARG CADDY_VERSION
 ARG BUILD_DATE
@@ -34,9 +36,7 @@ EXPOSE 8080 8443 2015
 ENV HOME=/caddydir \
     CADDYPATH=/caddydir/data \
     TZ=America/Montreal
-RUN mkdir -p /caddydir/data && \
-    chown -R 1000 /caddydir && \
-    chmod -R 700 /caddydir
+COPY --from=builder --chown=1000 /caddydir /caddydir
 VOLUME ["/caddydir"]
 ENTRYPOINT ["/caddy"]
 USER 1000

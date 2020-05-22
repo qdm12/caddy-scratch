@@ -3,8 +3,8 @@ services:
   caddy:
     image: qmcgaw/caddy-scratch
     container_name: caddy
-    volumes:
-      - ./caddydir:/caddydir
+    #volumes:
+    #  - ./caddydir:/caddydir
     environment:
       - TZ=America/Montreal
     network_mode: bridge

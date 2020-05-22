@@ -22,9 +22,7 @@
 - Plugins can easily be added by building the Docker image with a build argument
 - Compatible with `amd64`, `386` and `arm64` CPU architectures
 - [Docker image tags and sizes](https://hub.docker.com/r/qmcgaw/caddy-scratch/tags)
-    - `qmcgaw:caddy-scratch` / 41.1MB / Based on [Caddy v2.0.0](https://github.com/caddyserver/caddy/releases/tag/v2.0.0) and Alpine 3.11
-    - ~`qmcgaw:caddy-scratch:v2.0.0`~ / ? / Based on [Caddy v2.0.0](https://github.com/caddyserver/caddy/releases/tag/v2.0.0) - - -  **waiting for [this issue](https://github.com/caddyserver/xcaddy/issues/17)**
-    - `qmcgaw:caddy-scratch:v2.0.0-alpine` / 41.1MB / Based on [Caddy v2.0.0](https://github.com/caddyserver/caddy/releases/tag/v2.0.0) and Alpine 3.11 (*until [this issue](https://github.com/caddyserver/xcaddy/issues/17) gets resolved*)
+    - `qmcgaw:caddy-scratch` / 35.4MB / Based on [Caddy v2.0.0](https://github.com/caddyserver/caddy/releases/tag/v2.0.0) and Alpine 3.11
     - `qmcgaw:caddy-scratch:v1.0.5` / 17.2MB / Based on [Caddy v1.0.5](https://github.com/caddyserver/caddy/releases/tag/v1.0.5) / [**Documentation**](https://github.com/qdm12/caddy-scratch/blob/dd9e13597f99228b8dcf769155a1af67268aeaf2/README.md)
     - `qmcgaw:caddy-scratch:v1.0.4` / 17.3MB / Based on [Caddy v1.0.4](https://github.com/caddyserver/caddy/releases/tag/v1.0.4) / [**Documentation**](https://github.com/qdm12/caddy-scratch/blob/d387849664b0df7b931a31113017b70a0ebe18cc/README.md)
 
