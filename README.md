@@ -22,21 +22,18 @@
 - Plugins can easily be added by building the Docker image with a build argument
 - Compatible with `amd64`, `386` and `arm64` CPU architectures
 - [Docker image tags and sizes](https://hub.docker.com/r/qmcgaw/caddy-scratch/tags)
-    - `qmcgaw:caddy-scratch` / 35.5MB / Based on [Caddy v2.0.0](https://github.com/caddyserver/caddy/releases/tag/v2.0.0)
-    - `qmcgaw:caddy-scratch:v2.0.0` / 35.5MB / Based on [Caddy v2.0.0](https://github.com/caddyserver/caddy/releases/tag/v2.0.0)
-    - `qmcgaw:caddy-scratch:v1.0.5` / 17.2MB / Based on [Caddy v1.0.5](https://github.com/caddyserver/caddy/releases/tag/v1.0.5)
-    - `qmcgaw:caddy-scratch:v1.0.4` / 17.3MB / Based on [Caddy v1.0.4](https://github.com/caddyserver/caddy/releases/tag/v1.0.4)
+    - `qmcgaw:caddy-scratch` / 41.1MB / Based on [Caddy v2.0.0](https://github.com/caddyserver/caddy/releases/tag/v2.0.0) and Alpine 3.11
+    - ~`qmcgaw:caddy-scratch:v2.0.0`~ / ? / Based on [Caddy v2.0.0](https://github.com/caddyserver/caddy/releases/tag/v2.0.0) - - -  **waiting for [this issue](https://github.com/caddyserver/xcaddy/issues/17)**
+    - `qmcgaw:caddy-scratch:v2.0.0-alpine` / 41.1MB / Based on [Caddy v2.0.0](https://github.com/caddyserver/caddy/releases/tag/v2.0.0) and Alpine 3.11 (*until [this issue](https://github.com/caddyserver/xcaddy/issues/17) gets resolved*)
+    - `qmcgaw:caddy-scratch:v1.0.5` / 17.2MB / Based on [Caddy v1.0.5](https://github.com/caddyserver/caddy/releases/tag/v1.0.5) / [**Documentation**](https://github.com/qdm12/caddy-scratch/blob/dd9e13597f99228b8dcf769155a1af67268aeaf2/README.md)
+    - `qmcgaw:caddy-scratch:v1.0.4` / 17.3MB / Based on [Caddy v1.0.4](https://github.com/caddyserver/caddy/releases/tag/v1.0.4) / [**Documentation**](https://github.com/qdm12/caddy-scratch/blob/d387849664b0df7b931a31113017b70a0ebe18cc/README.md)
 
 ## Setup
 
 1. Launch the container
 
     ```sh
-    docker run -d \
-    -v $(pwd)/Caddyfile:/Caddyfile:ro \
-    -v $(pwd)/data:/data \
-    -v $(pwd)/srv:/srv:ro \
-    -e TZ=America/Montreal \
+    docker run -d -e TZ=America/Montreal \
     -p 80:8080/tcp -p 443:8443/tcp -p 2015:2015/tcp \
     qmcgaw/caddy-scratch
     ```
@@ -47,9 +44,25 @@
     docker-compose up -d
     ```
 
-### Plugins
+### Bind mount
 
-#### Caddy v2.0.x
+The data is persistent in a Docker anonymous volume by default.
+If you want to bind mount the data:
+
+1. Create the directory structure: `mkdir -p /yourpath/caddydir/data`
+1. Either `touch /yourpath/caddydir/Caddyfile` or place your Caddyfile there
+1. Set the right ownership and permissions for the container
+
+    ```sh
+    chown -R 1000 /yourpath/caddydir
+    chmod -R 700 /yourpath/caddydir
+    ```
+
+    Alternatively, you can run the container with `--user="1001"` for example, or as root with `--user="root"` (*unadvised*).
+
+1. Run the Docker command with `-v /yourpath/caddydir:/caddydir`
+
+### Plugins
 
 Note that many Caddy plugins **do not work yet** on Caddy 2
 
@@ -59,14 +72,6 @@ If you want to have for example the `github.com/caddyserver/ntlm-transport` plug
 docker build -t qmcgaw/caddy \
     --build-arg PLUGINS=github.com/caddyserver/ntlm-transport \
     https://github.com/qdm12/caddy-scratch.git
-```
-
-#### Caddy v1.0.x
-
-If you want to have for example the `minify` and the `ipfilter` plugins, build the image with:
-
-```sh
-docker build -t qmcgaw/caddy --build-arg PLUGINS=minify,ipfilter https://github.com/qdm12/caddy-scratch.git#v1.0.5
 ```
 
 ### Re-enable telemetry

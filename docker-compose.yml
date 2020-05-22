@@ -4,9 +4,7 @@ services:
     image: qmcgaw/caddy-scratch
     container_name: caddy
     volumes:
-      - ./Caddyfile:/Caddyfile:ro
-      - ./data:/data
-      - ./srv:/srv:ro
+      - ./caddydir:/caddydir
     environment:
       - TZ=America/Montreal
     network_mode: bridge
