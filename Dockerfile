@@ -8,7 +8,7 @@ RUN mkdir -p /caddydir/data && \
 ENV GO111MODULE=on \
     CGO_ENABLED=0
 RUN go get github.com/caddyserver/xcaddy/cmd/xcaddy
-ARG CADDY_VERSION=v2.0.0
+ARG CADDY_VERSION=v2.1.0
 WORKDIR /caddy
 ARG PLUGINS=
 RUN for plugin in $(echo $PLUGINS | tr "," " "); do withFlags="$withFlags --with $plugin"; done && \
