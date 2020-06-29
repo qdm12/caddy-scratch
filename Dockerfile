@@ -2,12 +2,12 @@ ARG ALPINE_VERSION=3.11
 ARG GO_VERSION=1.14
 
 FROM golang:${GO_VERSION}-alpine${ALPINE_VERSION} AS builder
-RUN apk add -q --progress --update --no-cache git musl-dev gcc ca-certificates tzdata
+RUN apk add -q --progress --update --no-cache git ca-certificates tzdata
 RUN mkdir -p /caddydir/data && \
     chmod -R 700 /caddydir
 ENV GO111MODULE=on \
     CGO_ENABLED=0
-RUN go get github.com/caddyserver/xcaddy/cmd/xcaddy@master
+RUN go get github.com/caddyserver/xcaddy/cmd/xcaddy
 ARG CADDY_VERSION=v2.0.0
 WORKDIR /caddy
 ARG PLUGINS=
