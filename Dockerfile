@@ -1,5 +1,5 @@
 ARG ALPINE_VERSION=3.12
-ARG GO_VERSION=1.14
+ARG GO_VERSION=1.15
 
 FROM golang:${GO_VERSION}-alpine${ALPINE_VERSION} AS builder
 RUN apk add -q --progress --update --no-cache git ca-certificates tzdata
@@ -8,7 +8,7 @@ RUN mkdir -p /caddydir/data && \
 ENV GO111MODULE=on \
     CGO_ENABLED=0
 RUN go get github.com/caddyserver/xcaddy/cmd/xcaddy
-ARG CADDY_VERSION=v2.1.0
+ARG CADDY_VERSION=v2.2.1
 WORKDIR /caddy
 ARG PLUGINS=
 RUN for plugin in $(echo $PLUGINS | tr "," " "); do withFlags="$withFlags --with $plugin"; done && \

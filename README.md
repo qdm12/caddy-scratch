@@ -1,6 +1,6 @@
 # Caddy Scratch Docker
 
-*Caddy server v2.1.0 / v1.0.5 without root, without OS and with optional Caddy plugins*
+*Caddy server v2.2.1 / v1.0.5 without root, without OS and with optional Caddy plugins*
 
 <img height="200" src="https://raw.githubusercontent.com/qdm12/caddy-scratch/master/title.svg?sanitize=true">
 
@@ -23,7 +23,8 @@
 
 | Docker tag | Caddy version | Size | Documentation | CPU architectures |
 | --- | --- | --- | --- | --- |
-| `:latest` | [`v2.1.0`](https://github.com/caddyserver/caddy/releases/tag/v2.1.0) | 39.2MB | ➡️ [Setup below](#Setup) | `amd64`, `386`, `arm64`, `armv7` |
+| `:latest` | [`v2.2.1`](https://github.com/caddyserver/caddy/releases/tag/v2.2.1) | 33.9MB | ➡️ [Setup below](#Setup) | `amd64`, `386`, `arm64`, `armv7` |
+| `:v2.2.1` | [`v2.2.1`](https://github.com/caddyserver/caddy/releases/tag/v2.2.1) | 33.9MB | ➡️ [Wiki link](https://github.com/qdm12/caddy-scratch/wiki/Caddy-v2.1.0) | `amd64`, `386`, `arm64`, `armv7` |
 | `:v2.1.0` | [`v2.1.0`](https://github.com/caddyserver/caddy/releases/tag/v2.1.0) | 39.2MB | ➡️ [Wiki link](https://github.com/qdm12/caddy-scratch/wiki/Caddy-v2.1.0) | `amd64`, `386`, `arm64`, `armv7` |
 | `:v2.0.0` | [`v2.0.0`](https://github.com/caddyserver/caddy/releases/tag/v2.0.0) | 35.4MB | ➡️ [Wiki link](https://github.com/qdm12/caddy-scratch/wiki/Caddy-v2.0.0) | `amd64`, `386`, `arm64`, `armv7` |
 | `:v1.0.5` | [`v1.0.5`](https://github.com/caddyserver/caddy/releases/tag/v1.0.5) | 17.2MB | ➡️ [Wiki link](https://github.com/qdm12/caddy-scratch/wiki/Caddy-v1.0.5) | `amd64`, `386`, `arm64` |
@@ -99,8 +100,6 @@ To access the [Caddy API](https://caddyserver.com/docs/api), you need:
 - (eventually) have port 2019 published by adding `-p 2019:2019/tcp` to your Docker run command
 
 ### Plugins
-
-Note that many Caddy plugins **do not work yet** on Caddy v2.1.0.
 
 You need [Git](https://git-scm.com/downloads) installed.
 
