@@ -1,6 +1,6 @@
 # Caddy Scratch Docker
 
-*Caddy server v2.2.1 / v1.0.5 without root, without OS and with optional Caddy plugins*
+*Caddy server v2.4.1 / v1.0.5 without root, without OS and with optional Caddy plugins*
 
 <img height="200" src="https://raw.githubusercontent.com/qdm12/caddy-scratch/master/title.svg?sanitize=true">
 
@@ -23,7 +23,8 @@
 
 | Docker tag | Caddy version | Size | Documentation | CPU architectures |
 | --- | --- | --- | --- | --- |
-| `:latest` | [`v2.3.0`](https://github.com/caddyserver/caddy/releases/tag/v2.3.0) | 37.3MB | ➡️ [Setup below](#Setup) | `amd64`, `386`, `arm64`, `armv7` |
+| `:latest` | [`v2.4.1`](https://github.com/caddyserver/caddy/releases/tag/v2.4.1) | 37.3MB | ➡️ [Setup below](#Setup) | `amd64`, `386`, `arm64`, `armv7` |
+| `:v2.4.1` | [`v2.4.1`](https://github.com/caddyserver/caddy/releases/tag/v2.4.1) | 37.5MB | ➡️ [Setup below](#Setup) | `amd64`, `386`, `arm64`, `armv7` |
 | `:2.3.0` | [`v2.3.0`](https://github.com/caddyserver/caddy/releases/tag/v2.3.0) | 37.3MB | ➡️ [Setup below](#Setup) | `amd64`, `386`, `arm64`, `armv7` |
 | `:v2.2.1` | [`v2.2.1`](https://github.com/caddyserver/caddy/releases/tag/v2.2.1) | 33.9MB | ➡️ [Setup below](#Setup) | `amd64`, `386`, `arm64`, `armv7` |
 | `:v2.1.0` | [`v2.1.0`](https://github.com/caddyserver/caddy/releases/tag/v2.1.0) | 39.2MB | ➡️ [Wiki link](https://github.com/qdm12/caddy-scratch/wiki/Caddy-v2.1.0) | `amd64`, `386`, `arm64`, `armv7` |
