@@ -1,5 +1,5 @@
-ARG ALPINE_VERSION=3.12
-ARG GO_VERSION=1.15
+ARG ALPINE_VERSION=3.13
+ARG GO_VERSION=1.16
 
 FROM golang:${GO_VERSION}-alpine${ALPINE_VERSION} AS builder
 RUN apk add -q --progress --update --no-cache git ca-certificates tzdata
