@@ -4,7 +4,7 @@ Caddy server v2.4.1 / v1.0.5 without root, without OS and with optional Caddy pl
 
 <img height="200" src="https://raw.githubusercontent.com/qdm12/caddy-scratch/master/title.svg">
 
-[![Build status](https://github.com/qdm12/caddy-scratch/workflows/Buildx%20latest/badge.svg)](https://github.com/qdm12/caddy-scratch/actions?query=workflow%3A%22Buildx+latest%22)
+[![Build status](https://github.com/qdm12/caddy-scratch/actions/workflows/ci.yml/badge.svg)](https://github.com/qdm12/caddy-scratch/actions/workflows/ci.yml)
 [![Docker Pulls](https://img.shields.io/docker/pulls/qmcgaw/caddy-scratch.svg)](https://hub.docker.com/r/qmcgaw/caddy-scratch)
 [![Docker Stars](https://img.shields.io/docker/stars/qmcgaw/caddy-scratch.svg)](https://hub.docker.com/r/qmcgaw/caddy-scratch)
 
