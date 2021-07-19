@@ -22,6 +22,7 @@ Caddy server v2.4.1 / v1.0.5 without root, without OS and with optional Caddy pl
 [![GitHub issues](https://img.shields.io/github/issues/qdm12/caddy-scratch.svg)](https://github.com/qdm12/caddy-scratch/issues)
 [![GitHub closed issues](https://img.shields.io/github/issues-closed/qdm12/caddy-scratch.svg)](https://github.com/qdm12/caddy-scratch/issues?q=is%3Aissue+is%3Aclosed)
 
+[![MIT](https://img.shields.io/github/license/qdm12/caddy-scratch)](https://github.com/qdm12/caddy-scratch/master/LICENSE)
 ![Visitors count](https://visitor-badge.laobi.icu/badge?page_id=caddy-scratch.readme)
 
 ## Features
@@ -136,10 +137,6 @@ docker build -t qmcgaw/caddy \
 - [ ] Use lists of IPs to block with ipfilter with `import blockIps`
 - [ ] Healthcheck for Caddy
 - [ ] Intelligent IP blocking
-
-## License
-
-This repository is under an [MIT license](https://github.com/qdm12/caddy-scratch/master/license)
 
 ## Thanks
 
