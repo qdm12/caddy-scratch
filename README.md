@@ -1,6 +1,6 @@
 # Caddy Scratch Docker
 
-*Caddy server v2.4.1 / v1.0.5 without root, without OS and with optional Caddy plugins*
+Caddy server v2.4.1 / v1.0.5 without root, without OS and with optional Caddy plugins
 
 <img height="200" src="https://raw.githubusercontent.com/qdm12/caddy-scratch/master/title.svg">
 
