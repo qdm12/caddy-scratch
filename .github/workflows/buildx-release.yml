@@ -32,4 +32,3 @@ jobs:
             -t qmcgaw/caddy-scratch:${GITHUB_REF##*/} \
             --push \
             .
-      - run: curl -X POST https://hooks.microbadger.com/images/qmcgaw/caddy-scratch/0cfauMomB4AqCj0ulbm2-WSIf-4= || exit 0
